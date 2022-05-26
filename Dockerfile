@@ -1,5 +1,5 @@
 FROM alpine:latest
-RUN  apk add --no-cache curl jq python3 py3-pip wget zip unzip
+RUN  apk add --no-cache curl jq python3 py3-pip wget zip unzip gpg vault libcap nano
 ################################
 # Install awscli
 ################################
@@ -26,3 +26,8 @@ RUN terraform --version
 
 # add aws cli location to path
 ENV PATH=~/.local/bin/sh:$PATH
+
+################################
+# Install Vault
+################################
+RUN setcap cap_ipc_lock= /usr/sbin/vault
